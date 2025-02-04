@@ -4,97 +4,113 @@
 This repository contains the replication package for the paper "Climate Risk and Poverty in Middle East and North Africa" by Chitra Balasubramanian, Sandra Baquie, Alan Fuchs (025). 
 
 ### Paper Abstract
-   The Middle East and North Africa (MENA) faces significant climate challenges, such as increasing temperatures, heightened flood risks, frequent droughts, and growing air pollution issues. These challenges are compounded by 30-60\% of poverty in different countries in the region. Indeed, people living in poverty are more exposed to poor air quality and natural disasters as they tend to disproportionately live in hazard-prone areas. They are also more vulnerable as they may have scarcer resources to cope with shocks. This paper combines remote sensing, geospatial data, and household surveys to provide high-resolution assessments of the exposure and vulnerability of the MENA population and poor people to four types of climate shocks. Of the almost 24 million extreme poor (below \$2.15) in the region that we have available data for\footnote{We do not have poverty estimates for Libya, Saudi Arabia, Syria and Oman}, we estimate that the entire 24 million are exposed to at least one climate shock. The region hosts climate-poverty hot spots in Yemen and Morocco, where adaptation to climate change will be crucial to end poverty. The resulting high-resolution estimates of exposure and vulnerability can inform the targeting of climate adaptation measures.
+   The Middle East and North Africa (MENA) faces significant climate challenges, such as increasing temperatures, heightened flood risks, frequent droughts, and growing air pollution issues. These challenges are compounded by 30-60\% of poverty in different countries in the region. Indeed, people living in poverty are more exposed to poor air quality and natural disasters as they tend to disproportionately live in hazard-prone areas. They are also more vulnerable as they may have scarcer resources to cope with shocks. This paper combines remote sensing, geospatial data, and household surveys to provide high-resolution assessments of the exposure and vulnerability of the MENA population and poor people to four types of climate shocks. Of the almost 24 million extreme poor (below \$2.15) in the region that we have available data for, we estimate that the entire 24 million are exposed to at least one climate shock. The region hosts climate-poverty hot spots in Yemen and Morocco, where adaptation to climate change will be crucial to end poverty. The resulting high-resolution estimates of exposure and vulnerability can inform the targeting of climate adaptation measures.
 
 ## Repository Structure
 ```
-├── code/
-│   ├── analysis/            # Analysis scripts
-│   │   ├── [analysis1].do
-│   │   └── [analysis2].R
-│   └── data_cleaning/       # Data preparation scripts
-│       ├── [clean1].py
-│       └── [clean2].R
-├── output/
-│   ├── figures/             # Generated figures
-│   │   ├── [figure1].pdf
-│   │   └── [figure2].png
-│   └── tables/              # Generated tables
-│       ├── [table1].tex
-│       └── [table2].csv
-└── docs/                    # Documentation
-    ├── codebook.pdf
-    └── variable_descriptions.md
+.
+├── Data/
+├── DataWork/
+│   ├── 00_Master
+│   ├── 00_downloading_datasets/
+│   ├── 01_creating_analysis_ready_datasets/
+│   │   ├── 01_CREATE_GRID.R
+│   │   ├── 02_EXTRACT_AIR_POL.R
+│   │   ├── 02_EXTRACT_AIRPORTS.R
+│   │   ├── 02_EXTRACT_CITY_CENTERS.R
+│   │   ├── 02_EXTRACT_CONFLICT.R
+│   │   ├── 02_EXTRACT_CROP_YIELD.R
+│   │   ├── 02_EXTRACT_DROUGHT.R
+│   │   ├── 02_EXTRACT_EDUC_FACILITIES.R
+│   │   ├── 02_EXTRACT_FLOOD.R
+│   │   ├── 02_EXTRACT_FLOOD_PARTI.R
+│   │   ├── 02_EXTRACT_FOREST_LOSS.R
+│   │   ├── 02_EXTRACT_HEALTH_FACILITIES.R
+│   │   ├── 02_EXTRACT_HEAT_STRESS.R
+│   │   ├── 02_EXTRACT_POP.R
+│   │   ├── 02_EXTRACT_PORTS.R
+│   │   ├── 02_EXTRACT_RWI.R
+│   │   ├── 02a_CLEAN_GAS_FLARES.R
+│   │   ├── 02b_EXTRACT_BLM_NTL.R
+│   │   ├── 02c_AGGREGATE_NTL_GAS_FLARES.R
+│   │   ├── 03a_MERGE_CITIES_PORTS_AIRPORTS.R
+│   │   ├── 03b_COMPUTE_TT_HEALTH_FACILITIES.R
+│   │   ├── 03c_COMPUTE_TT_EDUC_FACILITIES.R
+│   │   ├── 03d_COMPUTE_TT_MARKETS.R
+│   │   ├── 03e_MERGE_TT_GRID.R
+│   │   ├── 03f_SCORECARD_DIMS.R
+│   │   ├── 03g_MERGE_SCORECARD.R
+│   │   └── 03h_MERGE_ALL_VARIABLES.R
+│   ├── 02_analysis/
+│   │   ├── 01_ESTIMATE_NUMBER_POOR_RWI.R
+│   │   ├── 02_CREATE_EXPOSED_POOR_215_685_HAZARD.R
+│   │   ├── 03_CREATE_VULNERABILITY_THRESHOLDS.R
+│   │   ├── 04_CREATE_POOR_EXPOSED_VULNERABLE.R
+│   │   └── 05_CALCULATE_TOT_EXTREME_POOR.R
+│   └── 03_figures_tables/
+│       ├── 01_GRAPH_HAZARDS.R
+│       ├── 02_GRAPHS_EXPOSED_POPULATION.R
+│       ├── 03_GRAPHS_EXPOSED_POOR_215.R
+│       ├── 04_GRAPHS_VULNERABILITY_INDICATORS.R
+│       ├── 05_GRAPH_PEOPLE_EXPOSED_ALLHAZARDS.R
+│       ├── 06_GRAPH_HAZARD_MATRIX.R
+│       ├── 07_GRAPH_POOR_EXPOSED_ALLHAZARDS.R
+│       ├── 08_GRAPH_POOR_EXPOSED_EGYPT.R
+│       ├── 09_GRAPH_EXPOSED_POOR_OVERLAPS.R
+│       ├── 10_GRAPH_EXPOSED_POOR_VULNERABLE.R
+│       ├── 11_GRAPH_DENSITY_PLOT.R
+│       ├── 12_GRAPH_COMPOSITION_VULNERABILITY.R
+│       └── 13_GRAPH_POOR_EXPOSED_VULNERABLE_MOR_YEM.R
+└── Papers_and_Tables/
+    └── replication_output/
+        ├── graphs/
+        ├── maps/
+        └── tables/
 ```
 
 ## Software Requirements
-- Programming Language(s): [List versions]
-  - R [version]
-  - Python [version]
-  - Stata [version]
+- Programming Language(s): 
+  - R 4.2.1
 - Required Packages:
-  - R: [list key packages]
-  - Python: [list key packages]
-  - Stata: [list required packages/ado files]
+  - R: Use script 00_SET_PATHS.R
 
-## Data Availability Statement
-[Describe data sources, any access restrictions, and necessary permissions. Include DOIs or URLs for publicly available datasets.]
 
 ## Instructions for Replication
 
 ### Data Preparation
-1. Obtain the required datasets:
-   - Dataset 1: [Instructions for obtaining/accessing]
-   - Dataset 2: [Instructions for obtaining/accessing]
-2. Place the raw data files in the `data/raw/` directory
-3. Run the data cleaning scripts in the following order:
-   ```
-   code/data_cleaning/[script1].py
-   code/data_cleaning/[script2].R
-   ```
+0. Before starting, make sure to change paths in 00_SET_PATHS.R
+1. All raw datasets are in REPLICATION_RAW
+2. Run the scripts in 01_creating_analysis_ready_datasets/ to obtain the analysis datasets
 
 ### Analysis
-1. Ensure all required packages are installed
-2. Run the analysis scripts in the following order:
-   ```
-   code/analysis/[script1].do
-   code/analysis/[script2].R
-   ```
+2. Run the analysis scripts in 02_analysis/
 
-### Expected Runtime
-- Data Cleaning: [Approximate time]
-- Analysis: [Approximate time]
-- Total: [Total approximate time]
+### Expected Runtime 
+1 Day since there are two scripts ```02_EXTRACT_FLOOD.R + 02_EXTRACT_FLOOD_PARTI.R``` that are computationally heavy
 
 ## Results
-The main results can be reproduced by:
-1. [Specific instructions for main tables]
-2. [Specific instructions for main figures]
-3. [Instructions for any additional analyses]
+The main results can be reproduced by running all the scripts in 03_figures_tables/
 
 ### Output Files
-- Tables: `output/tables/`
-  - Table 1: [Description]
-  - Table 2: [Description]
-- Figures: `output/figures/`
-  - Figure 1: [Description]
-  - Figure 2: [Description]
-
-## Codebook
-[Brief description of the codebook and how to use it]
+The output files are stored in Papers_and_Tables
 
 ## Additional Information
-- [Any known issues or limitations]
-- [Additional notes about the replication process]
-- [Contact information for questions]
+For any issues with replication, please contact cbalasubramania2@worldbank.org
 
 ## License
-[Specify the license under which the replication package is released]
+
 
 ## Citation
 ```bibtex
-[BibTeX citation for the paper]
+@techreport{climate_risk_and_poverty,
+  title={Climate Risk and Poverty in Middle East and North Africa},
+  author={Balasubramanian,Chitra and Baquie, Sandra and Fuchs, Alan},
+  year={2025},
+  institution={World Bank Group},
+  type={Policy Research Working Paper},
+  address={Washington, D.C.},
+}
 ```
 
 ## Acknowledgments
-[Include any acknowledgments, funding sources, etc.]
+Analysis conducted as part of the Whole-of-Economy Trust Fund
