@@ -89,7 +89,7 @@ color_scale <- scale_fill_manual(values=custom_colors,
                                  aesthetics="fill")
 # Create the plot
 popdens_plot <- ggplot() +
-  geom_sf(data = pop_brks, aes(fill = brks), size = 0.01) + 
+  geom_sf(data = pop_brks, aes(fill = brks), size = 0.01, col = NA) + 
   color_scale +
   geom_sf(data = shp, color="black", alpha =0, size=0.1) +
   geom_sf(data = country, color="black", alpha =0, size=0.3) +
@@ -100,7 +100,7 @@ popdens_plot <- ggplot() +
 theme(legend.position = "bottom")
 
 #Export
-ggsave(filename = file.path(maps, "pop_density_2020.png"), plot=popdens_plot, height = 12, width = 16, units = c("in"))
+ggsave(filename = file.path(maps, "pop_density_2020.png"), plot=popdens_plot, height = 4, width = 6, units = c("in"))
 
 
 
@@ -218,7 +218,7 @@ ggplot() +
                     name = "# Exposed People to PM2.5 > 15ug/m3") +
   theme(legend.position = "bottom")
 
-ggsave(filename = file.path(maps, "exposed_people_air_pol.png"), height = 12, width = 16, units = c("in"))
+ggsave(filename = file.path(maps, "exposed_people_air_pol.png"), height = 4, width = 8, units = c("in"))
 
 
 

@@ -57,6 +57,30 @@ duplicated_vars <- c("OBJECTID", "ADM0_CODE", "ADM1_CODE", "ADM2_CODE", "ISO_A2"
 
 
 
+# Renaming before merging -------------------------------------------------
+
+gf_ntl <- gf_ntl %>%
+  rename(
+    gf_ntl_mean_2017 = ntl_mean_2017,
+    gf_ntl_mean_2018 = ntl_mean_2018,
+    gf_ntl_mean_2019 = ntl_mean_2019,
+    gf_ntl_mean_2020 = ntl_mean_2020,
+    gf_ntl_mean_2021 = ntl_mean_2021,
+    gf_change_in_ntl_2021_2017 = change_in_ntl_2021_2017
+  )
+
+# For the second dataset (nogf_ntl), add prefix 'nogf_'
+nogf_ntl <- nogf_ntl %>%
+  rename(
+    nogf_ntl_mean_2017 = ntl_mean_2017,
+    nogf_ntl_mean_2018 = ntl_mean_2018,
+    nogf_ntl_mean_2019 = ntl_mean_2019,
+    nogf_ntl_mean_2020 = ntl_mean_2020,
+    nogf_ntl_mean_2021 = ntl_mean_2021,
+    nogf_change_in_ntl_2021_2017 = change_in_ntl_2021_2017
+  )
+
+
 
 # 3. Merging the datasets ----------------------------------------------------
 
@@ -155,8 +179,7 @@ if (length(duplicate_cols) > 0) {
   warning("Found duplicate columns: ", paste(duplicate_cols, collapse = ", "))
 }
 
-
-
+names(final_dataset)
 
 
 # Export ------------------------------------------------------------------

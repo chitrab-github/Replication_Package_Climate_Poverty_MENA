@@ -69,7 +69,7 @@ wbtemp_plot <- ggplot() +
 
 wbtemp_plot
 # Export
-ggsave(filename = file.path(maps, "wbgt.png"), plot=wbtemp_plot, height = 12, width = 16, units = c("in"))
+ggsave(filename = file.path(maps, "wbgt.png"), plot=wbtemp_plot, height = 4, width = 8, units = c("in"))
 
 
 
@@ -95,7 +95,7 @@ color_scale <- scale_fill_manual(values = colors, na.value = "grey50", name = "F
 
 # Create the plot
 drought_plot <- ggplot() +
-  geom_sf(data = drought_prj, aes(fill = discrete_drought_freq), size = 0.0001) + 
+  geom_sf(data = drought_prj, aes(fill = discrete_drought_freq), size = 0.0001, col = NA) + 
   color_scale +
   geom_sf(data = shp, color="black", alpha =0, size=0.1) +
   geom_sf(data = country, color="black", alpha =0, size=0.3) +
@@ -105,7 +105,7 @@ drought_plot <- ggplot() +
   theme(legend.position = "bottom")
 
 #Export
-ggsave(filename = file.path(maps, "drought.png"), height = 12, width = 16, units = c("in"))
+ggsave(filename = file.path(maps, "drought.png"), height = 4, width = 8, units = c("in"))
 
 
 
@@ -122,7 +122,7 @@ color_scale <- scale_fill_gradient(low = "white", high = "Purple4", breaks = seq
 
 # Create the plot
 poll_plot <- ggplot() +
-  geom_sf(data = air_pol_prj, aes(fill = annual_mean2_pm25), size = 0.01) + 
+  geom_sf(data = air_pol_prj, aes(fill = annual_mean2_pm25), size = 0.01, col = NA) + 
   color_scale +
   geom_sf(data = shp, color="black", alpha =0, size=0.0001) +
   geom_sf(data = country, color="black", alpha =0, size=0.3) +
@@ -133,7 +133,7 @@ poll_plot <- ggplot() +
   theme(legend.position = "bottom")
 
 #Export
-ggsave(filename = file.path(maps, "air_pol.png"), height = 12, width = 16, units = c("in"))
+ggsave(filename = file.path(maps, "air_pol.png"), height = 4, width = 8, units = c("in"))
 
 
 
@@ -164,7 +164,7 @@ flood_prj$flood_expected <- cut(flood_prj$grid_flood_expected,
                                 right = FALSE)
 # Create the plot
 flood_plot <- ggplot() +
-  geom_sf(data = flood_prj, aes(fill = flood_expected), size = 0.00001, col ="white") + 
+  geom_sf(data = flood_prj, aes(fill = flood_expected), size = 0.00001, col = NA) + 
   scale_fill_manual(values = colors, 
                     na.value="grey50",
                     breaks = labels,
@@ -177,4 +177,4 @@ flood_plot <- ggplot() +
   theme(legend.position = "bottom")
 
 #Export
-ggsave(filename = file.path(maps, "flood.png"), height = 12, width = 16, units = c("in"))
+ggsave(filename = file.path(maps, "flood.png"), height = 4, width = 8, units = c("in"))

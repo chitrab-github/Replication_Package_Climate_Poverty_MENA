@@ -74,7 +74,7 @@ ggplot() +
   guides(fill = guide_legend(direction = "horizontal", title.position = "top", label.position = "bottom", nrow = 1, keywidth = 1, keyheight = 0.5))+
   theme(legend.position = "bottom")
 
-ggsave(filename = file.path(maps, "number_poor_215.png"), height = 12, width = 16, units = c("in"))
+ggsave(filename = file.path(maps, "number_poor_215.png"), height = 4, width = 10, units = c("in"))
 
 names(gsap_rwi_grid_prj)
 
@@ -96,7 +96,7 @@ ggplot() +
   guides(fill = guide_legend(direction = "horizontal", title.position = "top", label.position = "bottom", nrow = 1, keywidth = 1, keyheight = 0.5)) +
   theme(legend.position = "bottom")
 
-ggsave(filename = file.path(maps, "share_poor_215.png"), height = 12, width = 16, units = c("in"))
+ggsave(filename = file.path(maps, "share_poor_215.png"), height = 4, width = 10, units = c("in"))
 
 
 
