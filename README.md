@@ -9,7 +9,6 @@ This repository contains the replication package for the paper "Climate Risk and
 ## Repository Structure
 ```
 .
-├── Data/
 ├── DataWork/
 │   ├── 00_Master
 │   ├── 00_downloading_datasets/
@@ -61,7 +60,7 @@ This repository contains the replication package for the paper "Climate Risk and
 │       ├── 11_GRAPH_DENSITY_PLOT.R
 │       ├── 12_GRAPH_COMPOSITION_VULNERABILITY.R
 │       └── 13_GRAPH_POOR_EXPOSED_VULNERABLE_MOR_YEM.R
-└── Papers_and_Tables/
+└── Paper Tables and Figures/
     └── REPLICATION_OUTPUT/
         ├── GRAPHS/
         ├── MAPS/
