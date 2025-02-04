@@ -1,10 +1,10 @@
 # Replication Package for Climate Risk and Poverty in Middle East and North Africa
 
 ## Overview
-This repository contains the replication package for the paper "Climate Risk and Poverty in Middle East and North Africa" by [Chitra Balasubramanian, Sandra Baquie, Alan Fuchs] ([2025]). 
+This repository contains the replication package for the paper "Climate Risk and Poverty in Middle East and North Africa" by Chitra Balasubramanian, Sandra Baquie, Alan Fuchs (025). 
 
 ### Paper Abstract
-[Insert paper abstract here]
+   The Middle East and North Africa (MENA) faces significant climate challenges, such as increasing temperatures, heightened flood risks, frequent droughts, and growing air pollution issues. These challenges are compounded by 30-60\% of poverty in different countries in the region. Indeed, people living in poverty are more exposed to poor air quality and natural disasters as they tend to disproportionately live in hazard-prone areas. They are also more vulnerable as they may have scarcer resources to cope with shocks. This paper combines remote sensing, geospatial data, and household surveys to provide high-resolution assessments of the exposure and vulnerability of the MENA population and poor people to four types of climate shocks. Of the almost 24 million extreme poor (below \$2.15) in the region that we have available data for\footnote{We do not have poverty estimates for Libya, Saudi Arabia, Syria and Oman}, we estimate that the entire 24 million are exposed to at least one climate shock. The region hosts climate-poverty hot spots in Yemen and Morocco, where adaptation to climate change will be crucial to end poverty. The resulting high-resolution estimates of exposure and vulnerability can inform the targeting of climate adaptation measures.
 
 ## Repository Structure
 ```
