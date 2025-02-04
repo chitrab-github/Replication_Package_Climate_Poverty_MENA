@@ -1,21 +1,20 @@
-# ================================================================
-# Script Name: 03e_MERGE_TT_GRID.R
-# Purpose: Calculate dimensions that are similar to the corporate scorecard
-# Input Dataset: grid_10km.shp, 
+# =============================================================================
+# Script Name: 03f_SCORECARD_DIMS.R
+# Purpose: Calculate the indicators for social protection, and financial access
+# Input Dataset: grid_10km.shp, ASPIRE.dta, Findex_quintiles.dta
 # Output Dataset: tt_health_educ_markets.Rds
 # Author: Sandra Baquie
 # Last Updated: 2024-08-05
-# ================================================================
+# =============================================================================
 
 ############################################################
 # 1. Combine all household surveys ---------------------------------------------------------------
 ############################################################
 
-# Set the working directory to the folder containing your files
-setwd(data_hh_survey)
 
 # List all files ending with "_v2.dta"
-file_list <- list.files(pattern = "_v2.dta$")
+file_list <- list.files(path = data_hh_survey, pattern = "_v2.dta$", full.names = TRUE)
+
 
 file_list
 
@@ -50,27 +49,29 @@ hh_surveys <- hh_surveys %>%
   mutate(unique_id = row_number())
 
 # Optionally, you can save the appended data to a new file
-write_dta(hh_surveys, "hh_surveys_all.dta")
+write_dta(hh_surveys, file.path(data_hh_survey, "hh_surveys_all.dta"))
+
 
 ############################################################
 # 2.  ASPIRE and FINDEX ---------------------------------------------------------------
 ############################################################
 
 # List of countries
-country_codes <- substr(file_list, 1, 3)
+country_codes <- str_extract(file_list, "[A-Za-z]{3}(?=_[0-9])")  # Start and end positions of the country code
+
 
 # ASPIRE: Filter aspire data for countries we have
-setwd(aspire_findex)
-aspire <- read_dta("ASPIRE.dta")
+aspire <- read_dta( file.path(data_hh_survey, "ASPIRE.dta"))
 aspire_mena <- subset(aspire, Country_Code %in% country_codes)
 unique(aspire_mena$Country_Code)
+
 # 10 countries in MENA (missing MLT)
 aspire_mena <- aspire_mena %>%
   filter(grepl("per_allsp\\.cov_q[1-5]_(rur|tot|urb)", Indicator_Code))
 
 
 # FINDEX: Filter aspire data for countries we have
-findex <- read_dta("Findex_quintiles.dta")
+findex <- read_dta(file.path(data_hh_survey,"Findex_quintiles.dta"))
 findex_mena <- subset(findex, code %in% country_codes)
 unique(findex_mena$code)
 # 11 MENA countries
@@ -115,10 +116,12 @@ hh_surveys <-hh_surveys %>%
 # Understand the weights
 # Drop the observation with missing weight
 hh_surveys <- hh_surveys[complete.cases(hh_surveys$weight_p), ]
+
 # Calculate total weight_p for each Country_code
 total_weight_by_country <- aggregate(weight_p ~ countrycode, data = hh_surveys, FUN = sum)
 total_weight_by_country <- total_weight_by_country %>%
   rename (total_weight_by_country=weight_p)
+
 # Total poverty weights is really off compared to population totals in some countries. 
 hh_surveys <- hh_surveys %>%
   left_join(total_weight_by_country, by = c("countrycode" = "countrycode"))
@@ -130,10 +133,12 @@ pop <- readRDS(file.path(mena_file_path,"Population","final","grid_pop_10km_v2.R
 total_population <- pop %>%
   group_by(ISO_A2) %>%
   summarise(total_population = sum(pop_count, na.rm = TRUE))
+
 # Merge
 total_population$ISO_A3<- countrycode(total_population$ISO_A2, "iso2c", "iso3c")
 hh_surveys <- hh_surveys %>%
   left_join(total_population, by = c("countrycode" = "ISO_A3"))
+
 # Rescale the weights
 hh_surveys$weight_p2<-hh_surveys$weight_p*(hh_surveys$total_population/hh_surveys$total_weight_by_country)
 total_weight_by_country2 <- aggregate(weight_p2 ~ countrycode, data = hh_surveys, FUN = sum)
@@ -159,38 +164,38 @@ wb_pov_2019 <- wb_data(indicator = c("SI.POV.DDAY", "SI.POV.LMIC"),
                        gapfill=TRUE, 
                        mrv=10)
 
-## The numebrs are the same; so the discrepancy with GSAP really comes from the projection. 
+## The numbers are the same; so the discrepancy with GSAP really comes from the projection. 
 ## The underlying dataset doing that was not shared by Mingh. 
 
-############################################################
-# 5. Collapse at subadmin level and check fit GSAP ---------------------------------------------------------------
-############################################################
-
-vuln_hh <- hh_surveys %>%
-  group_by(countrycode, subnatid, subnatid2, subnatid3) %>%
-  summarise(
-    dep_infra_elec = sum(dep_infra_elec * weight_p2) / sum(weight_p2),
-    dep_infra_water = sum(dep_infra_water * weight_p2) / sum(weight_p2),
-    dep_educ = sum(dep_educ * weight_p2) / sum(weight_p2),
-    poor_215 = sum(poor_215 * weight_p2) / sum(weight_p2),
-    poor_365 = sum(poor_365 * weight_p2) / sum(weight_p2),
-    .groups = 'drop'  # Drop grouping structure after summarising
-  )
-
-#write.xlsx(vuln_hh, file = file.path(data_hh_survey, "vuln_estimates.xlsx"))
-
-grid_poor<- readRDS(file.path(final,"grid_10km_poor_final_corrected2.Rds"))
-grid_comp <- grid_poor %>%
-  group_by(ISO_A2, WB_ADM1_NA, WB_ADM2_NA, baseyear, survname, id) %>%
-  summarise(
-    poor_215_gsap = mean(poor215_ln),
-    poor_365_gsap = mean(poor365_ln),
-    .groups = 'drop'  # Drop grouping structure after summarizing
-  )
-
-## See the excel for the comparison. There is a difference because of the lineup to 2019. 
-## The numbers in GSAP are projections for 2019, not the original ones. 
-## I write the code to do the projection below.
+# ############################################################
+# # 5. Collapse at subadmin level and check fit GSAP ---------------------------------------------------------------
+# ############################################################
+# 
+# vuln_hh <- hh_surveys %>%
+#   group_by(countrycode, subnatid, subnatid2, subnatid3) %>%
+#   summarise(
+#     dep_infra_elec = sum(dep_infra_elec * weight_p2) / sum(weight_p2),
+#     dep_infra_water = sum(dep_infra_water * weight_p2) / sum(weight_p2),
+#     dep_educ = sum(dep_educ * weight_p2) / sum(weight_p2),
+#     poor_215 = sum(poor_215 * weight_p2) / sum(weight_p2),
+#     poor_365 = sum(poor_365 * weight_p2) / sum(weight_p2),
+#     .groups = 'drop'  # Drop grouping structure after summarising
+#   )
+# 
+# #write.xlsx(vuln_hh, file = file.path(data_hh_survey, "vuln_estimates.xlsx"))
+# 
+# grid_poor<- readRDS(file.path(final_replication,"grid_10km_poor_final_corrected2.Rds"))
+# grid_comp <- grid_poor %>%
+#   group_by(ISO_A2, WB_ADM1_NA, WB_ADM2_NA, baseyear, survname, id) %>%
+#   summarise(
+#     poor_215_gsap = mean(poor215_ln),
+#     poor_365_gsap = mean(poor365_ln),
+#     .groups = 'drop'  # Drop grouping structure after summarizing
+#   )
+# 
+# ## See the excel for the comparison. There is a difference because of the lineup to 2019. 
+# ## The numbers in GSAP are projections for 2019, not the original ones. 
+# ## I write the code to do the projection below.
 
 ############################################################
 # 6. Add the projection to 2019 ---------------------------------------------------------------
@@ -215,6 +220,7 @@ yemen_growth_data <- wb_data(indicator = 'NY.GDP.PCAP.KD',  # GDP per capita
                              freq = 'Y') %>%
   mutate(NY.GDP.PCAP.PP.KD=NY.GDP.PCAP.KD) %>%
   dplyr::select(-NY.GDP.PCAP.KD)
+
 gdp_growth_data <- rbind(gdp_growth_data, yemen_growth_data)
 
 # GDP growth rate
@@ -249,6 +255,8 @@ for (i in (start_year + 1):2019) {
   hh_surveys_proj[[previous_welfare_var]] <- ifelse(hh_surveys_proj$year==i-1, hh_surveys_proj$welfare_ppp, ifelse(hh_surveys_proj$year<i-1, hh_surveys_proj[[previous_welfare_var]], NA))
   hh_surveys_proj[[welfare_var]] <- ifelse(hh_surveys_proj$year<i,(1 + 0.7*(hh_surveys_proj[[gdp_growth_var]] / 100)) * hh_surveys_proj[[previous_welfare_var]], NA)
 }          
+
+
 # Generate the projection with neutral distribution and 1 passthrough (for Yemen)
 # Loop through each year from the year after the start_year to the end_year
 for (i in (start_year + 1):2019) {
@@ -342,9 +350,10 @@ hh_surveys <- hh_surveys %>%
 # Make them probabilities
 hh_surveys$account<-hh_surveys$account/100
 hh_surveys$sp_cov<-hh_surveys$sp_cov/100
-### Save the temp file
-#saveRDS(hh_surveys, file.path(data_hh_survey,
-#                               "HH_surveys_SP_Fin.Rds"))
+
+## Save the temp file
+saveRDS(data_hh_survey, file.path(data_hh_survey,
+                              "HH_surveys_SP_Fin.Rds"))
 
 
 ############################################################
@@ -455,9 +464,9 @@ hh_surveys <- hh_surveys %>%
     
   )
 
-# ### Save the file
-# saveRDS(hh_surveys, file.path(data_hh_survey,
-#                               "HH_surveys_all_dim.Rds"))
+### Save the file
+saveRDS(hh_surveys, file.path(data_hh_survey,
+                              "HH_surveys_all_dim.Rds"))
 
 # Aggregate to compare with GSAP and GU
 hh_surveys_ADM <- hh_surveys %>%

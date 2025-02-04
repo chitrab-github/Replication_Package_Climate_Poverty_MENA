@@ -11,12 +11,12 @@
 
 ##Using a package called blackmarbler created by Rob Marty : https://github.com/worldbank/blackmarbler
 ##Note: Follow the instructions in the Github to generate token
-bearer <- "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbF9hZGRyZXNzIjoiY2hpdHJhYjNAZ21haWwuY29tIiwiaXNzIjoiQVBTIE9BdXRoMiBBdXRoZW50aWNhdG9yIiwiaWF0IjoxNzA1NTk3MDIyLCJuYmYiOjE3MDU1OTcwMjIsImV4cCI6MTg2MzI3NzAyMiwidWlkIjoiY2hpdHJhYjMiLCJ0b2tlbkNyZWF0b3IiOiJjaGl0cmFiMyJ9.OWoGTvxT4uacXDNtAac14nSCbvXk1XIpbO4Wh1yVMTM"
+bearer <- "eyJ0eXAiOiJKV1QiLCJvcmlnaW4iOiJFYXJ0aGRhdGEgTG9naW4iLCJzaWciOiJlZGxqd3RwdWJrZXlfb3BzIiwiYWxnIjoiUlMyNTYifQ.eyJ0eXBlIjoiVXNlciIsInVpZCI6ImNoaXRyYWIzIiwiZXhwIjoxNzQzNzM1NjgxLCJpYXQiOjE3Mzg1NTE2ODEsImlzcyI6Imh0dHBzOi8vdXJzLmVhcnRoZGF0YS5uYXNhLmdvdiIsImlkZW50aXR5X3Byb3ZpZGVyIjoiZWRsX29wcyIsImFjciI6ImVkbCIsImFzc3VyYW5jZV9sZXZlbCI6M30.7ZLJPkCaf568L0u1pmcY0arki4hyzqAYsddWjn2xvpvYp1EXQS580jthkzX2cdGFFBJXZJ6N4eTy7UbeimidRNjQ7Z-lMOumVZxAmVMdtzsm3NbMxKkT1yMiN_1bBCE34sFq9xHKIKhzyhCPwEE8Ro5Dk7KCdESg2Tpv5dpgthITKbmMeoHNuuyclS2m8aE2terpnZlRXGSbSMKI6gkM4W6I4eKnAqbc3bQEPoYiIs8YYophP6zEj0siFQA9Yfwd9sYkVNgJuNuaaQz3Zcts3u6syzksuPGJaeyzbyv89iAJ2GYcd1ylwRbITUdk_K3bc4y35JZCoO-tJcgK2_Nt9A"
 
 
 
 # Load Data ---------------------------------------------------------------
-grid_sf <- st_read(file.path(mena_file_path, "Boundaries", "final", "grid_10km.shp"))
+grid_sf <- st_read(file.path(final_replication, "grid_10km.shp"))
 
 
 

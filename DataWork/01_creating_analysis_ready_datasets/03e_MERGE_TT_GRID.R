@@ -17,38 +17,40 @@ grid_sf <- st_read(file.path(final_replication,"grid_10km.shp"))
 
 
 
-# Load Travel Time (Health, Education, Markets) 
-
-read_and_merge_csv_files <- function(directory_path, output_var_name) {
+read_and_merge_csv_files <- function(directory_path) {
   # Get a list of all CSV files in the directory
-  csv_files <- list.files(path = directory_path, pattern = "\\.csv$", full.names = TRUE)
+  csv_files <- list.files(path = directory_path, pattern = "final_output_.*\\.csv$", full.names = TRUE)
   
   # Read each CSV file into a list of data frames and add the country name as a new column
   list_of_data_frames <- lapply(csv_files, function(file) {
     data_frame <- read.csv(file)
-    # Extract the country name, remove "output_" prefix and ".csv" suffix
-    country_name <- gsub(".csv", "", basename(file))
-    country_name <- gsub("output_", "", country_name)
+    
+    # Extract the country name from the file name (remove "final_output_" and ".csv")
+    country_name <- gsub("final_output_", "", basename(file))
+    country_name <- gsub(".csv", "", country_name)
+    
     data_frame$Country <- country_name  # Add the country name as a new column
     return(data_frame)
   })
   
-  # Combine all data frames into a single data frame and return it
+  # Combine all data frames into a single data frame
   combined_data_frame <- do.call(rbind, list_of_data_frames)
   
-  # Assign the combined data frame to the specified output variable name
-  assign(output_var_name, combined_data_frame, envir = .GlobalEnv)
+  # Return the combined data frame
+  return(combined_data_frame)
 }
 
+
+
 # Process CSV files for Health
-tt_health <- read_and_merge_csv_files("C:/Users/OneDrive - WBG/MENAPOV Geospatial Documents - MENAPOV Geospatial Files/MENAPOV GEO/Projects/vulnerability/REPLICATION_RAW_DATA/OSM/intermediate/health", "tt_health")
+tt_health <- read_and_merge_csv_files("C:/Users/wb569257/OneDrive - WBG/MENAPOV Geospatial Documents - MENAPOV Geospatial Files/MENAPOV GEO/Projects/vulnerability/REPLICATION_RAW_DATA/OSM/intermediate/health")
 
 # Process CSV files for Education
-tt_educ <- read_and_merge_csv_files("C:/Users/OneDrive - WBG/MENAPOV Geospatial Documents - MENAPOV Geospatial Files/MENAPOV GEO/Projects/vulnerability/REPLICATION_RAW_DATA/OSM/intermediate/health", "tt_educ")
+tt_educ <- read_and_merge_csv_files("C:/Users/wb569257/OneDrive - WBG/MENAPOV Geospatial Documents - MENAPOV Geospatial Files/MENAPOV GEO/Projects/vulnerability/REPLICATION_RAW_DATA/OSM/intermediate/educ")
 
+# Process CSV files for Markets
+tt_markets <- read_and_merge_csv_files("C:/Users/wb569257/OneDrive - WBG/MENAPOV Geospatial Documents - MENAPOV Geospatial Files/MENAPOV GEO/Projects/vulnerability/REPLICATION_RAW_DATA/OSM/intermediate/markets")
 
-#Process CSV files for Markets
-tt_markets <- read_and_merge_csv_files("C:/Users/OneDrive - WBG/MENAPOV Geospatial Documents - MENAPOV Geospatial Files/MENAPOV GEO/Projects/vulnerability/REPLICATION_RAW_DATA/OSM/intermediate/markets", "tt_markets")
 
 
 
@@ -140,7 +142,7 @@ merged_tt <- merge(grid_sf,tt_health, by = c("grid_id")) %>%
 
 
 # Export ------------------------------------------------------------------
-saveRDS(merged_tt, file.path(osm_final, "tt_health_educ_markets.Rds"))
+saveRDS(merged_tt, file.path(final_replication, "grid_tt_health_educ_markets.Rds"))
 
 
 

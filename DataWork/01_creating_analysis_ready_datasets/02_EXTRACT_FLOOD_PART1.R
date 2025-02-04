@@ -1,3 +1,14 @@
+# ================================================================
+# Script Name: 02_EXTRACT_FLOOD.R
+# Purpose: Create a 10*10km grid of flood estimates from FATHOM
+# Input Dataset: grid_10km.shp,FU_[RETURN PERIOD].tif
+# Output Dataset: grid_flood_10km
+# Author: Chitra Balasubramanian 
+# Last Updated: 2024-08-05
+# Time Taken: 
+# ================================================================
+
+
 
 #Increase R memory
 rasterOptions(chunksize=1e+06, maxmemory=1e+09)
