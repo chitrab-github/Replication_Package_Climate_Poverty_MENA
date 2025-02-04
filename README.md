@@ -83,10 +83,10 @@ This repository contains the replication package for the paper "Climate Risk and
 2. Run the scripts in 01_creating_analysis_ready_datasets/ to obtain the analysis datasets
 
 ### Analysis
-2. Run the analysis scripts in 02_analysis/
+Run the analysis scripts in 02_analysis/
 
 ### Expected Runtime 
-1 Day since there are two scripts ```02_EXTRACT_FLOOD.R + 02_EXTRACT_FLOOD_PARTI.R``` that are computationally heavy
+One Day since there are two scripts ```02_EXTRACT_FLOOD.R + 02_EXTRACT_FLOOD_PARTI.R``` that are computationally heavy
 
 ## Results
 The main results can be reproduced by running all the scripts in 03_figures_tables/
