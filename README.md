@@ -1,4 +1,4 @@
-# Replication Package for [Paper Title]
+# Replication Package for Climate Risk and Poverty in Middle East and North Africa
 
 ## Overview
 This repository contains the replication package for the paper "Climate Risk and Poverty in Middle East and North Africa" by [Chitra Balasubramanian, Sandra Baquie, Alan Fuchs] ([2025]). 
