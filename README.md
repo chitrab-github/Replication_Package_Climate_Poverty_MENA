@@ -62,10 +62,10 @@ This repository contains the replication package for the paper "Climate Risk and
 │       ├── 12_GRAPH_COMPOSITION_VULNERABILITY.R
 │       └── 13_GRAPH_POOR_EXPOSED_VULNERABLE_MOR_YEM.R
 └── Papers_and_Tables/
-    └── replication_output/
-        ├── graphs/
-        ├── maps/
-        └── tables/
+    └── REPLICATION_OUTPUT/
+        ├── GRAPHS/
+        ├── MAPS/
+
 ```
 
 ## Software Requirements
