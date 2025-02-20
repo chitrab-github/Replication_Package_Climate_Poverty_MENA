@@ -78,7 +78,7 @@ This repository contains the replication package for the paper "Climate Risk and
 
 ### Data Preparation
 0. Before starting, make sure to change paths in 00_SET_PATHS.R
-1. All raw datasets are in REPLICATION_RAW
+1. All raw datasets are in REPLICATION_RAW in the Sharepoint folder:[https://worldbankgroup.sharepoint.com/sites/MENAPOVGeospatialFiles/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FMENAPOVGeospatialFiles%2FShared%20Documents%2FMENAPOV%20GEO%2FIntranet&p=true&ga=1](Link to raw data)
 2. Run the scripts in 01_creating_analysis_ready_datasets/ to obtain the analysis datasets
 
 ### Analysis
