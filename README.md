@@ -10,7 +10,6 @@ This repository contains the replication package for the paper "Climate Risk and
 ```
 .
 ├── DataWork/
-│   ├── 00_Master
 │   ├── 00_downloading_datasets/
 │   ├── 01_creating_analysis_ready_datasets/
 │   │   ├── 01_CREATE_GRID.R
