@@ -75,7 +75,7 @@ This repository contains the replication package for the paper "Climate Risk and
 
 ### Data Availability Statement
 #### 1. Heat Stress Index (GFDRR, World Bank)
-**Name** : **Heat Stress Index **
+**Name** : Heat Stress Index
 
 **Note** : One can download the Heat Stress Index data from the GFDRR/World Bank website. After downloading, please place the data under REPLICATION_RAW_DATA/HEAT_STRESS.
 Source: GFDRR, World Bank.
