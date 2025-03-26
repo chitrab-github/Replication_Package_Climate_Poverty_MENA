@@ -84,7 +84,7 @@ Source: GFDRR, World Bank.
 These data are publicly available, and no restrictions may apply to further distribution. Hence, the dataset is bundled with this package.
 
 **Data URL**
-[https://gfdrr.github.io/CCDR-tools/docs/hzd_hm-data.html#hzd-hm-hs](GFDRR/World Bank website) (or the specific link provided by GFDRR/World Bank)
+[https://gfdrr.github.io/CCDR-tools/docs/hzd_hm-data.html#hzd-hm-hs] (GFDRR/World Bank website)
 
 
 ## Instructions for Replication
