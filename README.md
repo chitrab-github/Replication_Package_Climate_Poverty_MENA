@@ -172,7 +172,7 @@ Download from FAO, place under `REPLICATION_RAW_DATA/CROP_YIELD`. Source: FAO.
 
 ---
 
-### 3. Markets (OpenStreetMap), Educational Institutions (OpenStreetMap), Health Facilities (OpenStreetMap)
+### 3. Markets (OpenStreetMap), 4. Educational Institutions (OpenStreetMap), 5. Health Facilities (OpenStreetMap)
 **Name**  
 Travel Time to Seaports, Airports, and Major City Centers
 
