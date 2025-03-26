@@ -74,17 +74,217 @@ This repository contains the replication package for the paper "Climate Risk and
   - R: Use script 00_SET_PATHS.R
 
 ### Data Availability Statement
-#### 1. Heat Stress Index (GFDRR, World Bank)
-**Name** : Heat Stress Index
 
-**Note** : One can download the Heat Stress Index data from the GFDRR/World Bank website. After downloading, please place the data under REPLICATION_RAW_DATA/HEAT_STRESS.
-Source: GFDRR, World Bank.
+This project uses multiple datasets, each of which is governed by its own access and licensing requirements. Below is a statement for each dataset, including the recommended folder structure for local storage and a link to the respective source.
 
-**Access Policy**
-These data are publicly available, and no restrictions may apply to further distribution. Hence, the dataset is bundled with this package.
+---
+## (a) Climate Risks
+
+### 1. Heat Stress Index (GFDRR, World Bank)
+**Name**  
+Heat Stress Index data
+
+**Note** 
+After downloading from the GFDRR/World Bank website, please place the data under `REPLICATION_RAW_DATA/HEAT_STRESS`.  Source: GFDRR, World Bank.
+
+**Access Policy**  
+Publicly available, included in the repository.
+
+**Data URL**  
+[GFDRR / World Bank] (https://gfdrr.github.io/CCDR-tools/docs/hzd_hm-data.html#hzd-hm-hs)
+
+---
+
+### 2. Flood Data (Fathom)
+**Name**  
+Fluvial Flooding Data
+
+**Note**  
+The data was procured from GFDRR. After downloading data, place under `REPLICATION_RAW_DATA/FLOOD`. Source: Fathom.
+
+**Access Policy**  
+Restricted data and you need to submit a request form to access the data. Included in the repository.
+
+**Data URL**  
+[GFDRR](https://gfdrr.github.io/CCDR-tools/docs/hzd_hm-data.html#hzd-hm-fl)
+
+---
+
+### 3. Drought Data (FAO Agricultural Stress Index)
+**Name**  
+FAO Agricultural Stress Index data
+
+**Note**  
+After downloading from the FAO website, place under `REPLICATION_RAW_DATA/CROP_YIELD`. Source: FAO.
+
+**Access Policy**  
+Publicly available.  Raw files are included in the repository.
+
+**Data URL**  
+[GFDRR Website](https://gfdrr.github.io/CCDR-tools/docs/hzd_hm-data.html#hzd-hm-dr)
+
+---
+
+### 4. Air Pollution Data (Van Donkelaar et al. 2021)
+**Name**  
+Annual PM2.5 Concentration data
+
+**Note**  
+- Download from Van Donkelaar et al. (2021) repository or affiliated institutions, place under `REPLICATION_RAW_DATA/PM2_5`. Source: Van Donkelaar et al. (2021).
+
+**Access Policy**  
+Publicly available for research use. included in this repository.
+
+**Data URL**  
+[GFDRR](https://gfdrr.github.io/CCDR-tools/docs/hzd_env-data.html#hzd-env-ap)
+
+---
+
+## (b) Vulnerability Indicators
+
+### 1. Nighttime Lights (NASA Black Marble)
+**Name**  
+Nighttime Lights data (2017-2021)
+
+**Note**  
+Download from NASA Black Marble, place under `REPLICATION_RAW_DATA/PM2_5`. We have scripts within the repo that pull from the NASA Black Marble data online. Source: NASA Black Marble.
+
+**Access Policy**  
+Publicly available (NASA open data). bundled in this repository.
+
+**Data URL**  
+[NASA Black Marble Portal](https://blackmarble.gsfc.nasa.gov/)
+
+---
+
+### 2. Aggregate Yield Achievement Ratio (FAO)
+**Name**  
+Yield Achievement Ratio data
+
+**Note**  
+Download from FAO, place under `REPLICATION_RAW_DATA/CROP_YIELD`. Source: FAO.
+
+**Access Policy**  
+- Publicly available. included in the repository
+
+**Data URL**  
+[FAO Statistics](https://data.apps.fao.org/map/catalog/srv/eng/catalog.search#/metadata/2e4efd5c-ed62-4fbd-a125-66a5b3be16af)
+
+---
+
+### 3. Markets (OpenStreetMap), Educational Institutions (OpenStreetMap), Health Facilities (OpenStreetMap)
+**Name**  
+Travel Time to Seaports, Airports, and Major City Centers
+
+**Note**  
+Derived from OpenStreetMap (OSM) layers, place results under `REPLICATION_RAW_DATA/OSM/raw/`. We download data from geofabrik.de. Source: OpenStreetMap.
+
+**Access Policy**  
+Open data license (ODbL).  
+
+**Data URL**  
+[OpenStreetMap](https://download.geofabrik.de/)
+
+---
+
+### 6. Conflict Events (ACLED)
+**Name**  
+Armed Conflict Location & Event Data
+
+**Note**  
+Download from ACLED, place under `REPLICATION_RAW_DATA/CONFLICT`. Source: Armed Conflict Location & Event Data Project (ACLED).
+
+**Access Policy**  
+- Publicly accessible with registration. Dataset not distributed via this repository due to ACLED’s redistribution limits.
+
+**Data URL**  
+[ACLED](https://acleddata.com/data/)
+
+---
+
+### 7. Forest Loss Cover (FAO)
+**Name**  
+Forest Loss Cover data (2000–2022)
+
+**Note**  
+- Download from FAO Forestry portal, place under `REPLICATION_RAW_DATA/FOREST_LOSS`. Source: Hansen et. al, 2013.
+
+**Access Policy**  
+Publicly available and included in the repository 
+
+**Data URL**  
+[Hansen et. al, 2013](https://developers.google.com/earth-engine/datasets/catalog/UMD_hansen_global_forest_change_2023_v1_11)
+
+---
+### 8. Global Financial Inclusion (Global Findex) Database 2021
+
+**Name**
+Global Financial Inclusion (Global Findex) Database 2021
+
+**Note**
+Source: World Bank. Date Accessed: March 2024 placed under `REPLICATION_RAW_DATA/HH_SURVEY/raw`. The dataset provides insights into global financial inclusion based on the 2021 Findex survey. The data was obtained from the World Bank Microdata Library and is publicly available for registered users.
+
+**Access policy**
+Public but does not allow republication. Publicly accessible through the World Bank's Microdata Library.
+
+**Data URL**  
+https://microdata.worldbank.org/index.php/catalog/4607
+
+---
+### 9. ASPIRE Database
+**Name**
+ASPIRE Database
+
+**Note**
+Source: World Bank placed under `REPLICATION_RAW_DATA/HH_SURVEY/raw`
+
+**Access policy**
+Published with the package
+
+**License**
+Creative Commons Attribution 4.0 International License (CC BY 4.0)
+
+**License URL**
+https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets
 
 **Data URL**
-[https://gfdrr.github.io/CCDR-tools/docs/hzd_hm-data.html#hzd-hm-hs] (GFDRR/World Bank website)
+https://www.worldbank.org/en/data/datatopics/aspire/documentation
+
+---
+### 10. Global Subnational Poverty Atlas (GSAP)
+**Name**
+Global Subnational Poverty Atlas(GSAP)
+
+**Note**
+This data entry includes lined-up subnational poverty estimates (based on international poverty line(s)) for more than 168 economies at administrative unit level 1 in 2010, 2019, and 2021. Administrative unit level 1 refers to the highest subnational unit level (examples include ‘state’, ‘governorate’, ‘province’) from household surveys. The data is downloaded from the link and placed in `REPLICATION_RAW_DATA/GSAP`
+
+**Access policy**
+Published with the package and available publicly
+
+**License**
+Creative Commons Attribution 4.0
+
+**Data URL**
+https://datacatalog.worldbank.org/int/search/dataset/0042041/global_subnational_poverty_atlas_gsap
+
+---
+### 11. WorldPop
+**Name**
+WordPop
+
+**Note**
+Gridded Population data downloaded for 2020 for every MENA country and placed under `REPLICATION_RAW_DATA/POPULATION`
+
+**Access policy**
+Published with the package and available publicly
+
+**License**
+Creative Commons Attribution 4.0
+
+**Data URL**
+https://hub.worldpop.org/geodata/listing?id=74
+
+---
 
 
 ## Instructions for Replication
