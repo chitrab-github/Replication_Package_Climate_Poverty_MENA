@@ -73,6 +73,19 @@ This repository contains the replication package for the paper "Climate Risk and
 - Required Packages:
   - R: Use script 00_SET_PATHS.R
 
+### Data Availability Statement
+#### 1. Heat Stress Index (GFDRR, World Bank)
+**Name** : **Heat Stress Index **
+
+**Note** : One can download the Heat Stress Index data from the GFDRR/World Bank website. After downloading, please place the data under REPLICATION_RAW_DATA/HEAT_STRESS.
+Source: GFDRR, World Bank.
+
+**Access Policy**
+These data are publicly available, and no restrictions may apply to further distribution. Hence, the dataset is bundled with this package.
+
+**Data URL**
+[https://gfdrr.github.io/CCDR-tools/docs/hzd_hm-data.html#hzd-hm-hs](GFDRR/World Bank website) (or the specific link provided by GFDRR/World Bank)
+
 
 ## Instructions for Replication
 
