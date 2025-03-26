@@ -314,14 +314,16 @@ For any issues with replication, please contact cbalasubramania2@worldbank.org
 
 ## Citation
 ```bibtex
-@techreport{climate_risk_and_poverty,
-  title={Climate Risk and Poverty in Middle East and North Africa},
-  author={Balasubramanian,Chitra and Baquie, Sandra and Fuchs, Alan},
-  year={2025},
-  institution={World Bank Group},
-  type={Policy Research Working Paper},
-  address={Washington, D.C.},
+@techreport{BalasubramanianBaquieFuchs2023,
+  author      = {Balasubramanian, Chitra and Baquie, Sandra and Fuchs, Alan},
+  title       = {Climate Risk and Poverty in the Middle East and North Africa (English)},
+  institution = {World Bank Group},
+  type        = {Policy Research Working Paper},
+  year        = {2023},
+  url         = {http://documents.worldbank.org/curated/en/099719203252534778},
+  note        = {Prosperity Washington, D.C. : World Bank Group}
 }
+
 ```
 
 ## Acknowledgments
