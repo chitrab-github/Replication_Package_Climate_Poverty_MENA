@@ -7,23 +7,9 @@
 # Last Updated: 2024-08-05
 # ================================================================
 
-# Clean environment
-rm(list = ls())
-
-
-
-
-## Package loading
-# Note: Needs IT to install Rtools40 on computer first; then, install:
-# renv::install("github::rspatial/terra")
-
-
-
-
-
 # List of required packages
 packages <- c(
-  "dplyr", "data.table", "zoo", "foreign", "haven", "sf", "rgeos", "tidyverse", 
+  "dplyr", "data.table", "zoo", "foreign", "haven", "sf", "tidyverse", 
   "paletteer", "raster", "ggplot2", "exactextractr", "readxl", "colorspace", 
   "ncdf4", "foreach", "doParallel", "readr", "sp", "scales", "gridExtra", 
   "geojsonio", "lwgeom", "classInt", "RColorBrewer", "purrr", "parallel", 
@@ -40,24 +26,14 @@ new_packs <- packages[!(packages %in% installed.packages()[, "Package"])]
 if (length(new_packs)) install.packages(new_packs)
 lapply(packages, require, character.only = TRUE)
 
-# Ensure specific version of ggplot2
-remotes::install_version("ggplot2", version = "3.4.4", repos = "http://cran.us.r-project.org")
+# Load all packages
+invisible(lapply(packages, library, character.only = TRUE))
 
+library(ggplot2)
+library(renv)
 
-
-
-
-
-## Directory setting [Need to change directory settings to setup the locals]
-if (Sys.getenv('USERNAME') == "wb569257") {
-  mena_path <- "M:/MENA"
-  global_file_path <- "M:/GEOGlobal"
-  mena_file_path <- "M:/MENA/GEO"
-  onedrive_dir <- "C:/Users/wb569257/OneDrive - WBG/MENAPOV Geospatial Documents - MENAPOV Geospatial Files/MENAPOV GEO/Projects/vulnerability"
-  
   ### RAW DATASETS
-  raw_replication <- file.path(onedrive_dir, "REPLICATION_RAW_DATA")
-  
+  raw_replication <- file.path(getwd(), "Data", "REPLICATION_RAW_DATA")
   
   # PM2.5
   mena_file_path_air_pol <- file.path(raw_replication,"PM2_5")
@@ -65,24 +41,24 @@ if (Sys.getenv('USERNAME') == "wb569257") {
   #FLOOD
   mena_file_path_flood <- file.path(raw_replication,"FLOOD")
   
-  
   #HEAT STRESS
   mena_file_path_heat <-  file.path(raw_replication,"HEAT_STRESS")
-  
   
   #RWI
   mena_file_path_rwi <- file.path(raw_replication, "RWI")
   
-  
   #GMD Database
   data_hh_survey <- file.path(file.path(raw_replication, "HH_SURVEYS","raw"))
   
-  
   ### FINAL DATASET
-  final_replication <- file.path(onedrive_dir, "REPLICATION_FINAL_DATA")
+  final_replication <- file.path(getwd(), "Data", "REPLICATION_FINAL_DATA")
+  
+  mena_file_path <- final_replication
   
   ### OUTPUT
-  graphs <- file.path(onedrive_dir, "output", "Figures", "graphs")
-  tables <- file.path(onedrive_dir, "output", "Figures", "tables")
-  maps <- file.path(onedrive_dir, "output", "Figures", "maps", "MENA")
-}
+  graphs <- file.path(getwd(), "Paper Tables and Figures", "REPLICATION_OUTPUT", "GRAPHS")
+  tables <- file.path(getwd(), "Paper Tables and Figures", "REPLICATION_OUTPUT", "TABLES")
+  maps   <- file.path(getwd(), "Paper Tables and Figures", "REPLICATION_OUTPUT", "MAPS")
+
+
+

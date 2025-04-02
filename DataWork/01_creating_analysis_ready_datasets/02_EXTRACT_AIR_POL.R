@@ -12,12 +12,8 @@ system.time({
 # Parellelization -----------------------------------------------------------
 
 # Register parallel backend
-n_cores <- parallel::detectCores() - 1  # Leave one core free
+n_cores <- makeCluster(parallel::detectCores() - 1)
 doParallel::registerDoParallel(cores = n_cores)
-
-
-
-
 
 # 1. Load Data ---------------------------------------------------------------
 
@@ -52,21 +48,17 @@ process_raster <- function(nc_file, grid_sf) {
 }
 
 # Run parallel computation
-results <- foreach(nc_file = nc_files, .packages = c("raster", "sf", "exactextractr")) %dopar% {
-  process_raster(nc_file,grid_sf)
-}
+results <- foreach(nc_file = nc_files,
+                   .packages = c("raster", "sf", "exactextractr")) %dopar% {
+                     process_raster(nc_file, grid_sf)  # assumes grid_sf is in the global env
+                   }
+
 
 
 # Merge results back into grid_sf
 for (res in results) {
   grid_sf[[res$year_col_name]] <- res$extracted_values
 }
-
-
-
-
-
-grid_sf
 
 
 # Compute annual mean -----------------------------------------------------
@@ -91,12 +83,6 @@ grid_sf$annual_mean_pm25 <- grid_df$annual_mean_pm25
 column_names <- c("pm25_year_2015", "pm25_year_2016", "pm25_year_2017", "pm25_year_2018", "pm25_year_2019", 
                   "pm25_year_2020", "pm25_year_2021")
 grid_sf$annual_mean2_pm25 <- rowMeans(st_drop_geometry(grid_sf[,column_names]), na.rm = TRUE)
-
-
-
-
-
-
 
 
 # Export ------------------------------------------------------------------

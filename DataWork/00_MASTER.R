@@ -7,10 +7,23 @@
 # Last Updated: 2024-08-05
 # ================================================================
 
+## Package loading
+# Note: Needs IT to install Rtools40 on computer first; then, install:
+# install.packages("renv")
 
+# uncomment this line only the fist time you run this package
+# this will recover the environment 
+# renv::restore()
+# renv::install("github::rspatial/terra")
+
+# Clean environment
+rm(list = ls())
+
+#install.packages("remotes")
+#remotes::install_version("ggplot2", version = "3.5.0", repos = "http://cran.us.r-project.org")
 
 # Define the path to the directory containing the scripts
-script_path <- "C:/Users/wb569257/OneDrive - WBG/Documents/GitHub/Replication_package_Climate_Poverty_MENA"
+script_path <- file.path(getwd())
 
 source(file.path(script_path,"00_SET_PATHS.R"))
 
